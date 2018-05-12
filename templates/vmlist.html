@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+{% block title %}列表{% endblock %}
+{% block otherlink %}
+<script type="text/javascript" src="{{url_for('static',filename='js/page/vmlist.js')}}"></script>
+<style type="text/css">
+	a{
+		text-decoration: none;
+	}
+	.header-top{
+		position: relative;
+	}
+	.header-top .btn{
+		position: absolute;
+		top:0;
+		right:0;
+	}
+	.self-select .bootstrap-select{
+        width: 100% !important;
+    }
+    .jSubmit,.jSubmitClone{
+        float: right;
+    }
+    .alert-create{
+        width:500px;
+        height:430px;
+        background:#eee;
+        margin:0 auto;
+        border-radius: 6px;
+    }
+    .alert-create .margin-top{
+    	margin-top:40px;
+    }
+
+    .alert-clone{
+        width:500px;
+        height:200px;
+        background:#eee;
+        margin:0 auto;
+        border-radius: 6px;
+    }
+    .alert-clone .margin-top{
+    	margin-top:30px;
+    }
+       
+</style>
+{% endblock %}
+{% block body %}
+	<div class="header-top">
+		<h1>虚拟机列表</h1>
+		<button type="button" class="btn btn-primary jBtnCreate">创建</button>
+	</div>
+	{% if lenNo>0 or lenR >0 %}
+	<table class="table table-bordered table-responsive table-hover table-striped">
+		<thead>
+			<tr>
+				<td class="col-md-2">名称</td>
+				<td clasa="col-md-3">类型</td>
+				<td class="col-md-2">状态</td>
+				<td class="col-md-5">操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 运行虚拟机 -->
+			{% for item in rListArr %}
+			<tr data-name="{{item['name']}}" data-uuid="{{item['uuid']}}" data-ostype="{{item['ostype']}}" data-adrs="{{item['adrs']}}">
+				<td><a href="{{url_for('get_vminfo',name=item['name'])}}">{{item['name']}}</a></td>
+				<td>{{item['ostype']}}</td>
+				<td>运行中</td>
+				<td>
+					<button type="button" class="btn btn-primary jBtnPause">暂停</button>
+					<button type="button" class="btn btn-primary jBtnReset">重启</button>
+					<button type="button" class="btn btn-danger jBtnClose">关机</button>
+				</td>
+			</tr>
+			{% endfor %}
+
+			<!-- 未运行虚拟机 -->
+			{% for item in noRListArr %}
+			<tr data-name="{{item['name']}}" data-uuid="{{item['uuid']}}" data-ostype="{{item['ostype']}}" data-adrs="{{item['adrs']}}">
+				<td><a href="{{url_for('get_vminfo',name=item['name'])}}">{{item['name']}}</a></td>
+				<td>{{item['ostype']}}</td>
+				<td>未运行</td>
+				<td>
+					<button type="button" class="btn btn-primary jBtnBegin">启动</button>
+					<button type="button" class="btn btn-primary jBtnClone">拷贝</button>
+					<button type="button" class="btn btn-danger jBtnDel">删除</button>
+					<!-- <a href="{{url_for('get_vminfo',name=key)}}" type="button" class="btn btn-primary" href="">查看信息</a> -->
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div>暂无虚拟机</div>
+	{% endif %}
+
+<!-- 	<h1>运行虚拟机列表</h1>
+	{% if lenR>0 %}
+	<table class="table table-bordered table-responsive table-hover table-striped">
+		<thead>
+			<tr>
+				<td>名称</td>
+				<td>vm uuid</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for key in runningVmList %}
+			<tr data-name="{{key}}" data-uuid="{{runningVmList[key]}}">
+				<td>{{key}}</td>
+				<td>{{runningVmList[key]}}</td>
+				<td>
+					<button type="button" class="btn btn-primary jBtnPause">暂停</button>
+					<button type="button" class="btn btn-primary jBtnResume">恢复</button>
+					<button type="button" class="btn btn-primary jBtnReset">重启</button>
+					<button type="button" class="btn btn-primary jBtnClose">关机</button>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div>暂无虚拟机运行</div>
+	{% endif %} -->
+{% endblock %}

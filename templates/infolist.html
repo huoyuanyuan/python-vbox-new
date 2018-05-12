@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block title %}列表{% endblock %}
+
+{% block body %}
+	{% if err %}
+	<h1>缺少 name 参数</h1>
+	{% else %}
+
+	<h1>虚拟机信息</h1>
+	<table class="table table-bordered table-responsive table-hover table-striped">
+		<thead>
+			<tr>
+				<td>key</td>
+				<td>value</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for key in vmInfo %}
+			<tr data-name="{{key}}" data-uuid="{{vmInfo[key]}}">
+				<td>{{key}}</td>
+				<td>{{vmInfo[key]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{% endif %}
+	
+{% endblock %}

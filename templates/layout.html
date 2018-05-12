@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="http://asset.xueleyun.com/v2/css/g.min.css?version=20180419205516">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-theme.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-select.min.css') }}"/>
+    <!-- <script src="{{ url_for('static',filename='js/lib/jquery.js') }}"></script> -->
+    <script type="text/javascript" src="http://asset.xueleyun.com/v2/js/g.min.js?version=20180419205516"></script>
+    <script type="text/javascript" src="http://asset.xueleyun.com/v2/js/wfe.min.js?version=20180419205516"></script>
+    <script src="{{ url_for('static',filename='js/lib/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lib/bootstrap-select.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lib/arttemplate.js') }}"></script>
+    <style type="text/css">
+        body,html{
+            background:#fff;
+        }
+    </style>
+	{% block otherlink %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('index') }}">首页</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+            	<!-- <li><a href="{{url_for('create_vm')}}">创建</a></li> -->
+            	<li><a href="{{url_for('get_vmlist')}}">所有列表</a></li>
+            	<!-- <li><a href="{{url_for('get_running_vmlist')}}">运行列表</a></li> -->
+                <!-- <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">vm列表<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url_for('get_vmlist')}}">所有列表</a></li>
+                        <li><a href="{{url_for('get_running_vmlist')}}">运行列表</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container body-content">
+	{% block body %}{% endblock %}
+</div>
+
+</body>
+</html>
